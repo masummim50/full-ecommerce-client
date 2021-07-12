@@ -9,6 +9,7 @@ import './Header.css'
 
 const CustomHeader = () => {
 
+
   const allLinks = [
     {name:'Your Cart', icon:faCartPlus, route:'/yourcart'},
     {name:'Sign In', icon:faSign, route:'/signin'}
@@ -43,8 +44,10 @@ const CustomHeader = () => {
         </div>
         <div className="col-5">
           <div class="form-inline d-flex">
-            <input onKeyDown={(e)=>onEnterClick(e)} ref={searchWord} class="form-control" type="search" placeholder="Search" aria-label="Search"/>
-            <button onClick={()=>performSearch()} class="btn btn-outline-white text-white my-2 my-sm-0 btn-small header-links"><FontAwesomeIcon icon={faSearch}/></button>
+            <input onKeyDown={(e)=>onEnterClick(e)} ref={searchWord} class="form-control w-75" type="search" placeholder="Search" aria-label="Search"/>
+            <button onClick={()=>performSearch()} class="btn btn-outline-white text-white my-2 my-sm-0 btn-small header-links">
+              <FontAwesomeIcon icon={faSearch}/>
+            </button>
           </div>
         </div>
         <div className="col-5">
@@ -52,7 +55,15 @@ const CustomHeader = () => {
             {
               allLinks.map(
                 link=> 
-                <Link to={`${link.route}`} className="text-white text-decoration-none header-links"> <span className="link-icon mr-2"><FontAwesomeIcon icon={link.icon}/>{addedProducts.length}</span><span className="link-name">{link.name}</span></Link>
+                <Link to={`${link.route}`} className="text-white text-decoration-none header-links">
+                  <span className="link-icon mr-2">
+                    <FontAwesomeIcon icon={link.icon}/>
+                    {addedProducts.length}
+                  </span>
+                  <span className="link-name">
+                    {link.name}
+                  </span>
+                </Link>
               )
             }
           </div>

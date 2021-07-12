@@ -1,5 +1,7 @@
 import axios from "axios"
 import { ADD_PRODUCT, EMPTY_ALL, EMPTY_DETAILS_PAGE, LOAD_PRODUCTS, LOAD_PRODUCT_DETAILS, LOAD_SAME_CATEGORY_PRODUCTS, LOAD_SEARCHED_PRODUCTS } from "./actionTypes"
+import { loadProductsReducer } from './allReducer';
+import { store } from './store';
 
 
 export const loadProducts = ()=>{
@@ -49,9 +51,18 @@ export const emptyDetailsPage = ()=>{
 }
 
 export const addProductAction = (payload)=>{
-  return {
-    type:ADD_PRODUCT,
-    payload:payload
+  return function(dispatch, getState){
+    let {addedProducts}= getState().loadProductsReducer;
+    const foundproduct = addedProducts.find(a=>a._id===payload._id);
+      if(foundproduct===undefined){
+        payload.quantity = 1;
+        payload.combinePrice= payload.price;
+      }else{
+        payload.quantity += 1;
+        payload.combinePrice = payload.price*payload.quantity;
+        addedProducts = addedProducts.filter(pr=>pr._id!==payload._id)
+      }
+      dispatch({type:ADD_PRODUCT, payload:payload})
   }
 }
 
