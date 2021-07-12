@@ -25,7 +25,7 @@ const ProductContainer = () => {
     <div>
       {
           typeof(allProducts)==='string' ? 
-          <div className="text-center" style={{height:'100vh'}}>
+          <div className="text-center mt-5" style={{height:'100vh'}}>
             <h2 className="text-danger">
               Sorry, no such item found<br/> try a different keyword?
             </h2>
@@ -33,13 +33,13 @@ const ProductContainer = () => {
         
         :
           allProducts.length>0 ? 
-          <div className="row row-cols-3 row-cols-md-4">
+          <div className="mt-5 row row-cols-3 row-cols-md-4">
           {
           allProducts.map(product=> <SingleProduct product={product}></SingleProduct> )
           }
           </div>
         :
-          <div className="row row-cols-3 row-cols-md-4">
+          <div className="row row-cols-3 row-cols-md-4 mt-5">
           {
             Array(20).fill().map(number=> <SkeletonCard/>)
           } 

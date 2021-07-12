@@ -1,5 +1,8 @@
 
-
+*{
+  margin:0;
+  padding:0;
+}
 p{
   margin:0;
 }
@@ -10,3 +13,4 @@ p{
   box-shadow: 1px 1px 5px grey;
   color:rgb(213, 213, 213);
 }
+
