@@ -24,6 +24,15 @@ const SingleProduct = ({product}) => {
     setshowaddedmessage(true);
     setTimeout(()=>setshowaddedmessage(false),1000)
   };
+
+  const deleteproduct = (e,product)=>{
+    console.log(product);
+    fetch(`http://localhost:5000/delete/${product._id}`,{
+      method:'DELETE'
+    })
+    e.target.parentNode.parentNode.parentNode.innerHTML = ''
+    e.preventDefault()
+  }
   
   
   return (
@@ -39,6 +48,7 @@ const SingleProduct = ({product}) => {
             <div className="d-flex justify-content-between align-items-center">
               <h4 className="text-success price">{price}$</h4>
               <button onClick={(e)=>addProduct(e,product)} className="btn btn-small btn-success add-to-cart-button">Add to Cart</button>
+              <button onClick={(e)=>deleteproduct(e,product)}>delete</button>
             </div>
           </div>
         </Link>

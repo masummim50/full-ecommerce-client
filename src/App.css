@@ -6,11 +6,5 @@
 p{
   margin:0;
 }
-.product-shadow{
-  transition: 0.6s ease;
-}
-.product-shadow:hover{
-  box-shadow: 1px 1px 5px grey;
-  color:rgb(213, 213, 213);
-}
+
 

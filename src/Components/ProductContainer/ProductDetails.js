@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { emptyDetailsPage, loadProductDetails, loadSameCategoryProducts } from '../../redux/actions';
+import CustomHeader from '../Shared/Header/CustomHeader';
 import SingleProduct from './SingleProduct';
 import SkeletonCard from './SkeletonCard';
 
@@ -27,7 +28,7 @@ const ProductDetails = () => {
     <div>
       {
         selectedProduct.name ?
-        <div>
+        <div className="mt-5">
           {name}<br/>
           <h2>the category is {category}</h2>
           <img src={img}/>

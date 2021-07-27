@@ -11,12 +11,14 @@ import {
 import ProductDetails from './Components/ProductContainer/ProductDetails';
 import CustomHeader from './Components/Shared/Header/CustomHeader';
 import Cart from './Components/YourCart/Cart';
+import AddProduct from './Components/AddProduct/AddProduct';
 
 
 function App() {
 
   return (
     <Router>
+      <CustomHeader/>
         <Switch>
           <Route exact path='/'>
             <Home/>
@@ -27,6 +29,9 @@ function App() {
           <Route exact path='/yourcart'>
             <CustomHeader/>
             <Cart/>
+          </Route>
+          <Route exact path="/addProduct">
+            <AddProduct/>
           </Route>
           <Route exact path='/:searchedWord'>
             <Home/>

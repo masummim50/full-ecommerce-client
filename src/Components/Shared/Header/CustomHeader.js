@@ -1,4 +1,4 @@
-import { faCartPlus, faSearch, faSign } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faPlusSquare, faSearch, faSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useRef } from 'react';
@@ -8,18 +8,16 @@ import { emptyAll, loadSearchedProducts } from '../../../redux/actions';
 import './Header.css'
 
 const CustomHeader = () => {
-
-
   const allLinks = [
     {name:'Your Cart', icon:faCartPlus, route:'/yourcart'},
-    {name:'Sign In', icon:faSign, route:'/signin'}
+    {name:'Sign In', icon:faSign, route:'/signin'},
+    {name:'Add Product', icon:faPlusSquare, route:'/addProduct'}
   ];
 
   const addedProducts = useSelector((state)=> state.loadProductsReducer.addedProducts);
   const searchWord = useRef();
   const dispatch = useDispatch();
   const history = useHistory();
-  // history.push isn't working. its still dispatching all product loading action.
   const performSearch = ()=>{
     const wordTyped = searchWord.current.value;
     history.push(`/${wordTyped}`)
@@ -35,7 +33,7 @@ const CustomHeader = () => {
   }
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mb-5">
       <div className="header-row row bg-success d-flex align-items-center">
         <div className="col-2">
           <Link className="text-white text-decoration-none" to="/">
