@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { emptyDetailsPage, loadProductDetails, loadSameCategoryProducts } from '../../redux/actions';
+import { addProductAction, emptyDetailsPage, loadProductDetails, loadSameCategoryProducts } from '../../redux/actions';
 import CustomHeader from '../Shared/Header/CustomHeader';
 import SingleProduct from './SingleProduct';
 import SkeletonCard from './SkeletonCard';
@@ -24,6 +24,7 @@ const ProductDetails = () => {
   // const selectedProduct = products.find(pr=>pr._id === id);
   // const {name, _id, price, img}= selectedProduct;
 
+
   return (
     <div>
       {
@@ -32,6 +33,7 @@ const ProductDetails = () => {
           {name}<br/>
           <h2>the category is {category}</h2>
           <img src={img}/>
+          <button onClick={()=>dispatch(addProductAction(selectedProduct))}>Add to cart</button>
         </div> 
         :
         <SkeletonCard/>

@@ -11,7 +11,7 @@ const Cart = () => {
           <li>this is name: {a.name}</li>
           <li>{a.price}</li>
           <li>{a.combinePrice}</li>
-          <li>{a.quantity}</li>
+          <li>quantity of product added{a.quantity}</li>
         </ul>)
       }
     </div>

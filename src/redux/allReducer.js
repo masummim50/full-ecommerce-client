@@ -17,20 +17,22 @@ export const loadProductsReducer = (state=initialState, {type, payload})=> {
     case 'EMPTY_DETAILS_PAGE':
       return {...state, selectedProduct:{}}
     case 'ADD_PRODUCT':
-      const foundproduct = state.addedProducts.find(a=>a._id===payload._id);
-      if(foundproduct===undefined){
-        payload.quantity = 1;
-        payload.combinePrice= payload.price;
-      }else{
-        payload.quantity += 1;
-        payload.combinePrice = payload.price*payload.quantity;
-        state.addedProducts = state.addedProducts.filter(pr=>pr._id!==payload._id)
-      }
-      return {...state, addedProducts: [...state.addedProducts, payload]};
+      // const foundproduct = state.addedProducts.find(a=>a._id===payload._id);
+      // if(foundproduct===undefined){
+      //   payload.quantity = 1;
+      //   payload.combinePrice= payload.price;
+      // }else{
+      //   payload.quantity += 1;
+      //   payload.combinePrice = payload.price*payload.quantity;
+      //   state.addedProducts = state.addedProducts.filter(pr=>pr._id!==payload._id)       [...state.addedProducts, payload]
+      // }
+      return {...state, addedProducts: payload};
     case 'LOAD_PRODUCT_DETAILS':
       return {...state, selectedProduct:payload[0]}
     case 'LOAD_SAME_CATEGORY_PRODUCTS':
       return {...state, sameCategoryProducts:payload}
+    case 'LOAD_MORE_PRODUCTS':
+      return {...state, allProducts:[...state.allProducts, ...payload]}
     default:
       return state;
   }

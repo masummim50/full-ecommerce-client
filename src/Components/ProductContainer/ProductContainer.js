@@ -1,7 +1,7 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { emptyAll, loadProducts } from '../../redux/actions';
+import { emptyAll, loadMoreProducts, loadProducts } from '../../redux/actions';
 import SingleProduct from './SingleProduct';
 import SkeletonCard from './SkeletonCard';
 
@@ -12,13 +12,21 @@ const ProductContainer = () => {
   const allProducts = useSelector((state)=> state.loadProductsReducer.allProducts);
   const url = window.location.href;
   const loadingDecision = ()=> {
+    if(url === 'http://localhost:3000/'){
     dispatch(emptyAll())
-    url === 'http://localhost:3000/' && dispatch(loadProducts())
+    dispatch(loadProducts())
+    }
+    
   }
   useEffect(()=>{
     loadingDecision();
-    console.log('after search', allProducts)
   },[url]);
+  const loadmore = ()=>{
+      dispatch(loadMoreProducts(allProducts.length));
+      
+      // need to figure out a way to showing loading spinner for load more button. need to find if the state of allproduct changed
+  }
+
 
 
   return (
@@ -32,12 +40,16 @@ const ProductContainer = () => {
           </div>
         
         :
-          allProducts.length>0 ? 
+          allProducts.length>0 ? <>
           <div className="mt-5 row row-cols-3 row-cols-md-4">
           {
           allProducts.map(product=> <SingleProduct product={product}></SingleProduct> )
           }
           </div>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-info" onClick={loadmore}>Load more</button>
+          </div>
+          </>
         :
           <div className="row row-cols-3 row-cols-md-4 mt-5">
           {

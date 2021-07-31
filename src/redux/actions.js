@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ADD_PRODUCT, EMPTY_ALL, EMPTY_DETAILS_PAGE, LOAD_PRODUCTS, LOAD_PRODUCT_DETAILS, LOAD_SAME_CATEGORY_PRODUCTS, LOAD_SEARCHED_PRODUCTS } from "./actionTypes"
+import { ADD_PRODUCT, EMPTY_ALL, EMPTY_DETAILS_PAGE, LOAD_MORE_PRODUCTS, LOAD_PRODUCTS, LOAD_PRODUCT_DETAILS, LOAD_SAME_CATEGORY_PRODUCTS, LOAD_SEARCHED_PRODUCTS } from "./actionTypes"
 import { loadProductsReducer } from './allReducer';
 import { store } from './store';
 
@@ -53,16 +53,32 @@ export const emptyDetailsPage = ()=>{
 export const addProductAction = (payload)=>{
   return function(dispatch, getState){
     let {addedProducts}= getState().loadProductsReducer;
-    const foundproduct = addedProducts.find(a=>a._id===payload._id);
+    let foundproduct = addedProducts.find(a=>a._id===payload._id);
+    console.log('foundproduct', foundproduct);
+    console.log('payload', payload)
+    let newAddedProducts = [];
       if(foundproduct===undefined){
         payload.quantity = 1;
         payload.combinePrice= payload.price;
+        newAddedProducts = [...addedProducts, payload];
       }else{
-        payload.quantity += 1;
+        payload.quantity = foundproduct.quantity + 1;
         payload.combinePrice = payload.price*payload.quantity;
-        addedProducts = addedProducts.filter(pr=>pr._id!==payload._id)
+        addedProducts = addedProducts.filter(pr=>pr._id!==payload._id);
+        newAddedProducts = [...addedProducts, payload];
       }
-      dispatch({type:ADD_PRODUCT, payload:payload})
+        dispatch({type:ADD_PRODUCT, payload:newAddedProducts})
+  }
+}
+
+// load more products action
+export const loadMoreProducts = (payload)=>{
+  return function(dispatch, getState){
+    let {allProducts} = getState().loadProductsReducer;
+    axios.get(`http://localhost:5000/allProducts/showing/${payload}`)
+    .then(response => 
+    dispatch({type:LOAD_MORE_PRODUCTS, payload:response.data})
+    )
   }
 }
 

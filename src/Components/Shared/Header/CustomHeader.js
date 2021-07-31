@@ -33,7 +33,7 @@ const CustomHeader = () => {
   }
 
   return (
-    <div className="container-fluid mb-5">
+    <div className="custom-header-margin container-fluid mb-5">
       <div className="header-row row bg-success d-flex align-items-center">
         <div className="col-2">
           <Link className="text-white text-decoration-none" to="/">
