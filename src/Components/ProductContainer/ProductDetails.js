@@ -26,14 +26,21 @@ const ProductDetails = () => {
 
 
   return (
-    <div>
+    <div className="mt-5 container">
       {
         selectedProduct.name ?
-        <div className="mt-5">
-          {name}<br/>
-          <h2>the category is {category}</h2>
-          <img src={img}/>
-          <button onClick={()=>dispatch(addProductAction(selectedProduct))}>Add to cart</button>
+        <div className="d-flex">
+          <div className="product-image bg-info p-2">
+            <img src={img}/>
+          </div>
+          <div className="d-flex flex-column justify-content-between p-3">
+            <div className="product-description">
+              {name}
+            </div>
+            <div className="add-btn">
+              <button className="btn btn-light" onClick={()=>dispatch(addProductAction(selectedProduct))}>Add to cart</button>
+            </div>
+          </div>
         </div> 
         :
         <SkeletonCard/>
